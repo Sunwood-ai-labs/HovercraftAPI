@@ -5,12 +5,12 @@
 <h2 align="center">
   ～ Craft your story, let HovercraftAPI do the rest ～
 <br>
-  <img alt="PyPI - Version" src="https://img.shields.io/pypi/v/HovercraftAPI">
-<img alt="PyPI - Format" src="https://img.shields.io/pypi/format/HovercraftAPI">
-<img alt="PyPI - Implementation" src="https://img.shields.io/pypi/implementation/HovercraftAPI">
-<img alt="PyPI - Status" src="https://img.shields.io/pypi/status/HovercraftAPI">
-<img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dd/HovercraftAPI">
-<img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dw/HovercraftAPI">
+  <img alt="PyPI - Version" src="https://img.shields.io/pypi/v/hovercraft-api">
+<img alt="PyPI - Format" src="https://img.shields.io/pypi/format/hovercraft-api">
+<img alt="PyPI - Implementation" src="https://img.shields.io/pypi/implementation/hovercraft-api">
+<img alt="PyPI - Status" src="https://img.shields.io/pypi/status/hovercraft-api">
+<img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dd/hovercraft-api">
+<img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dw/hovercraft-api">
 <a href="https://github.com/Sunwood-ai-labs/HovercraftAPI" title="Go to GitHub repo"><img src="https://img.shields.io/static/v1?label=HovercraftAPI&message=Sunwood-ai-labs&color=blue&logo=github"></a>
 <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Sunwood-ai-labs/HovercraftAPI">
 <a href="https://github.com/Sunwood-ai-labs/HovercraftAPI"><img alt="forks - Sunwood-ai-labs" src="https://img.shields.io/github/forks/HovercraftAPI/Sunwood-ai-labs?style=social"></a>
