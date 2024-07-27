@@ -36,7 +36,7 @@
 
 ## 🌟 HovercraftAPI
 
-HovercraftAPIは、Markdownファイルから印象的なHovercraftプレゼンテーションを簡単に作成するためのPythonツールです。
+HovercraftAPIは、Markdownファイルから印象的なHovercraftプレゼンテーションを簡単に作成するためのPythonツールです。Mermaidダイアグラムやコードブロックのサポート、カスタムCSSによるスタイリングなど、多彩な機能を提供します。
 
 ## 🎥 デモ
 
@@ -73,22 +73,51 @@ api.generate_slides()
 * Mermaidダイアグラムとコードブロックをサポート
 * カスタムCSSによるスタイリング
 * CLIインターフェース対応
+* スライドのキャプチャと動画生成機能
 
 ## 必要条件
 
-* Python 3.7以上
-* Hovercraft
-* その他の依存関係は `requirements.txt` を参照してください。
+* Python 3.10以上
+* Poetry（依存関係管理に使用）
+* その他の依存関係は `pyproject.toml` を参照してください。
 
 ## カスタムCSS
 
 デフォルトのCSSファイルは `css/mytheme.css` です。カスタムCSSファイルを使用する場合は、`-c` または `--css` オプションで指定してください。
 
-## Markdownファイルの構造
+## プロジェクト構造
 
-HovercraftAPIは以下の構造のMarkdownファイルをサポートしています:
+```plaintext
+HovercraftAPI/
+├─ css/
+│  ├─ mytheme.css
+├─ docs/
+│  ├─ usage.md
+├─ example/
+│  ├─ README.md
+│  ├─ sample.py
+├─ hovercraft_api/
+│  ├─ code_block_alchemist.py
+│  ├─ HovercraftAPI.py
+│  ├─ hovercraft_converter.py
+│  ├─ markdown_to_rst_converter.py
+│  ├─ markdown_to_slides_converter.py
+│  ├─ mermaid_alchemist.py
+│  ├─ rst_adjuster.py
+│  ├─ slide_capturer.py
+│  ├─ utils.py
+│  ├─ __init__.py
+├─ pyproject.toml
+├─ README.md
+```
 
-(具体的なMarkdownファイルの構造についての記述は原文にないため、省略) 
+## 開発
+
+このプロジェクトはPoetryを使用して依存関係を管理しています。開発環境のセットアップは以下のコマンドで行えます：
+
+```bash
+poetry install
+```
 
 ## 🤝 貢献
 
@@ -100,5 +129,4 @@ HovercraftAPIは以下の構造のMarkdownファイルをサポートしてい�
 
 ## 📄 ライセンス
 
-このプロジェクトはMITライセンスの下で公開されています。詳細は [LICENSE](LICENSE) ファイルを参照してください。 
-
+このプロジェクトはMITライセンスの下で公開されています。詳細は [LICENSE](LICENSE) ファイルを参照してください。
