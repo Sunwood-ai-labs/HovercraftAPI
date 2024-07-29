@@ -40,7 +40,7 @@ HovercraftAPIは、Markdownファイルから印象的なHovercraftプレゼン�
 
 ## 🎥 デモ
 
-(デモ動画やGIFがあればここに挿入)
+https://github.com/user-attachments/assets/670f8b37-88eb-4f8e-9bbe-2bf9f7797d5e
 
 ## 🚀 はじめに
 
@@ -54,10 +54,12 @@ pip install hovercraft-api
 
 ### コマンドラインインターフェース
 
+基本的な使用方法:
 ```bash
 hovercraftapi example/README.md -c css/mytheme.css
 ```
 
+動的な位置決めを有効にする場合:
 ```bash
 hovercraft-api example/README.md -c css/mytheme.css --enable-dynamic-position
 ```
@@ -67,7 +69,7 @@ hovercraft-api example/README.md -c css/mytheme.css --enable-dynamic-position
 ```python
 from hovercraft_api import HovercraftAPI
 
-api = HovercraftAPI("your_markdown_file.md", css_file="path/to/your/custom.css")
+api = HovercraftAPI("your_markdown_file.md", css_file="path/to/your/custom.css", enable_dynamic_position=True)
 api.generate_slides()
 ```
 
@@ -77,7 +79,10 @@ api.generate_slides()
 * Mermaidダイアグラムとコードブロックをサポート
 * カスタムCSSによるスタイリング
 * CLIインターフェース対応
-* スライドのキャプチャと動画生成機能
+* スライドのキャプチャと動画生成機能 (実験的機能)
+* 動的なスライド位置決め機能 (v0.2.0で追加)
+* MermaidダイアグラムのSVG変換とアニメーション (v0.2.0で追加)
+* ローカルMermaid SVGプレビューサーバー (v0.2.0で追加)
 
 ## 必要条件
 
@@ -95,6 +100,7 @@ api.generate_slides()
 HovercraftAPI/
 ├─ css/
 │  ├─ mytheme.css
+│  ├─ flowchart1.css
 ├─ docs/
 │  ├─ usage.md
 ├─ example/
@@ -102,20 +108,24 @@ HovercraftAPI/
 │  ├─ sample.py
 ├─ hovercraft_api/
 │  ├─ code_block_alchemist.py
+│  ├─ dynamic_rst_adjuster.py
 │  ├─ HovercraftAPI.py
 │  ├─ hovercraft_converter.py
 │  ├─ markdown_to_rst_converter.py
 │  ├─ markdown_to_slides_converter.py
 │  ├─ mermaid_alchemist.py
+│  ├─ mermaid_server.py
+│  ├─ mermaid_svg_converter.py
 │  ├─ rst_adjuster.py
 │  ├─ slide_capturer.py
+│  ├─ svg_animator.py
 │  ├─ utils.py
 │  ├─ __init__.py
 ├─ pyproject.toml
 ├─ README.md
 ```
 
-## 開発
+## 🛠️ 開発
 
 このプロジェクトはPoetryを使用して依存関係を管理しています。開発環境のセットアップは以下のコマンドで行えます：
 
@@ -123,20 +133,20 @@ HovercraftAPI/
 poetry install
 ```
 
+動的な位置決めを有効にしてHovercraftAPIを実行:
 ```bash
 poetry run hovercraft-api example2\README.md  --enable-dynamic-position
 ```
 
+ローカルMermaid SVGプレビューサーバーを起動:
 ```bash
 poetry run python hovercraft_api\mermaid_server.py
 ```
 
-
+MermaidダイアグラムをSVGに変換:
 ```bash
 poetry run python hovercraft_api\mermaid_svg_converter.py
 ```
-
-
 
 ## 🤝 貢献
 
