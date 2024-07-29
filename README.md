@@ -11,6 +11,9 @@
 <img alt="PyPI - Status" src="https://img.shields.io/pypi/status/hovercraft-api">
 <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dd/hovercraft-api">
 <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dw/hovercraft-api">
+<img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/hovercraft-api">
+<img alt="PyPI - Downloads" src="https://img.shields.io/pepy/dt/hovercraft-api">
+
 <a href="https://github.com/Sunwood-ai-labs/HovercraftAPI" title="Go to GitHub repo"><img src="https://img.shields.io/static/v1?label=HovercraftAPI&message=Sunwood-ai-labs&color=blue&logo=github"></a>
 <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Sunwood-ai-labs/HovercraftAPI">
 <a href="https://github.com/Sunwood-ai-labs/HovercraftAPI"><img alt="forks - Sunwood-ai-labs" src="https://img.shields.io/github/forks/HovercraftAPI/Sunwood-ai-labs?style=social"></a>
@@ -59,7 +62,7 @@ pip install hovercraft-api
 hovercraftapi example/README.md -c css/mytheme.css
 ```
 
-動的な位置決めを有効にする場合:
+3Dダイナミックトランジションを有効にする場合:
 ```bash
 hovercraft-api example/README.md -c css/mytheme.css --enable-dynamic-position
 ```
@@ -80,9 +83,9 @@ api.generate_slides()
 * カスタムCSSによるスタイリング
 * CLIインターフェース対応
 * スライドのキャプチャと動画生成機能 (実験的機能)
-* 動的なスライド位置決め機能 (v0.2.0で追加)
-* MermaidダイアグラムのSVG変換とアニメーション (v0.2.0で追加)
-* ローカルMermaid SVGプレビューサーバー (v0.2.0で追加)
+* 動的なスライド位置決め機能 ([v0.2.0で追加](https://github.com/Sunwood-ai-labs/HovercraftAPI/releases/tag/v0.2.0))
+* MermaidダイアグラムのSVG変換とアニメーション ([v0.2.0で追加](https://github.com/Sunwood-ai-labs/HovercraftAPI/releases/tag/v0.2.0))
+* ローカルMermaid SVGプレビューサーバー ([v0.2.0で追加](https://github.com/Sunwood-ai-labs/HovercraftAPI/releases/tag/v0.2.0))
 
 ## 必要条件
 
@@ -133,7 +136,7 @@ HovercraftAPI/
 poetry install
 ```
 
-動的な位置決めを有効にしてHovercraftAPIを実行:
+3Dダイナミックトランジションを有効にしてHovercraftAPIを実行:
 ```bash
 poetry run hovercraft-api example2\README.md  --enable-dynamic-position
 ```
