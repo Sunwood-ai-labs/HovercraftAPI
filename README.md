@@ -55,7 +55,11 @@ pip install hovercraft-api
 ### コマンドラインインターフェース
 
 ```bash
-hovercraftapi your_markdown_file.md -c path/to/your/custom.css
+hovercraftapi example/README.md -c css/mytheme.css
+```
+
+```bash
+hovercraft-api example/README.md -c css/mytheme.css --enable-dynamic-position
 ```
 
 ### Pythonスクリプト内での使用
@@ -118,6 +122,21 @@ HovercraftAPI/
 ```bash
 poetry install
 ```
+
+```bash
+poetry run hovercraft-api example2\README.md  --enable-dynamic-position
+```
+
+```bash
+poetry run python hovercraft_api\mermaid_server.py
+```
+
+
+```bash
+poetry run python hovercraft_api\mermaid_svg_converter.py
+```
+
+
 
 ## 🤝 貢献
 
