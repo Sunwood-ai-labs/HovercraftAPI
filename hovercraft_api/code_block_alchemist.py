@@ -21,6 +21,7 @@ class CodeBlockTransmuter:
                 logger.success("コードブロック変換プロセスが見事に完了しました")
             else:
                 logger.warning("変換すべき非Mermaidコードブロックが見つかりませんでした")
+                self._manifest_transmutation(output_path, html_content)
         else:
             logger.error("必要な素材の召喚に失敗し、変換プロセスを中断します")
 

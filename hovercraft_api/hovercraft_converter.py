@@ -36,7 +36,7 @@ class HovercraftConverter:
 
 if __name__ == "__main__":
     # テスト用のRSTファイルを作成
-    test_rst = r"example\hovercraft_assets\test_output_hovercraft.rst"
+    test_rst = r"example\hovercraft_assets\test_output_dynamic_hovercraft.rst"
     converter = HovercraftConverter(output_dir=r'example\hovercraft_assets')
     
     try:

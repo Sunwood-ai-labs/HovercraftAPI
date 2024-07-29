@@ -167,3 +167,7 @@ tmp2.md
 .SourceSageAssets
 poetry.lock
 example/hovercraft_assets/
+crlf-detect.md
+output-1.svg
+docs/animated-flowchart.svg
+example2

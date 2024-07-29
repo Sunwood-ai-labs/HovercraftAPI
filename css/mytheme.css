@@ -19,4 +19,77 @@ h1, h2, h3 {
     color: #333;
 }
 
+/* Mermaid図のスタイル */
+.mermaid {
+    font-family: 'Shippori Mincho', serif !important;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    margin: 20px auto;
+    display: block;
+}
+
+.label {
+    font-family: 'Shippori Mincho', serif !important;
+    margin: 20px auto;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+}
+
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node ellipse,
+.mermaid .node polygon,
+.mermaid .node path {
+    fill: #fff4dd;
+    stroke: #ffd700;
+    rx: 5px;  /* 角を少し丸くする */
+    ry: 5px;
+}
+
+.mermaid .edgePath .path {
+    stroke: #333;
+}
+
+
+
+.mermaid .edgeLabel {
+    background-color: #fff;
+    font-family: 'Shippori Mincho', serif !important;
+}
+
 /* その他のカスタムスタイル */
+
+
+.flowchart-link {
+    animation: dash 30s linear infinite;
+}
+
+.label {
+    /*
+     * If you want to override mermaid's `themeCSS`, it's recommended to instead
+     * set `themeCSS` in your mermaid `configFile.json`
+     *
+     * However, sometimes `!important` can also be used to override `themeCSS`.
+     */
+    font-family: "Shippori Mincho" !important;
+}
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 1000;
+    }
+
+    10% {
+        /* No animation for the first 10% for consistent visual testing screenshots */
+        stroke-dashoffset: 1000;
+    }
+
+    100% {}
+}
+
+g.label foreignObject {
+    width: 120%;
+    text-align: left;
+}

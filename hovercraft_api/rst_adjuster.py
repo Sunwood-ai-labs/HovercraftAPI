@@ -35,7 +35,7 @@ class RSTAdjuster:
         print(text2art(">>    RSTAdjuster","rnd-medium"))
         logger.info(f"RSTファイル '{rst_file}' をHovercraft用に調整しています")
         content = self.read_file(rst_file)
-        slides = re.split(r'\n\n+', content)
+        slides = re.split(r'\n--------------\n+', content)
 
         new_content = [
             ":title: Your Presentation Title",

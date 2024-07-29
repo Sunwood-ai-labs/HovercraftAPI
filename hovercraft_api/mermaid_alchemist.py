@@ -1,21 +1,23 @@
 import re
 from loguru import logger
 from art import *
+from pprint import pformat
 
 class MermaidFusionMaster:
     def __init__(self):
         logger.info("MermaidFusionMasterを初期化しています")
 
-    def orchestrate_fusion(self, html_path, md_path, output_path):
+    def orchestrate_fusion(self, html_path, output_path):
         print(text2art(">>    MermaidFusionMaster","rnd-medium"))
         logger.info("Mermaid統合プロセスを開始します")
         html_content = self._acquire_content(html_path)
-        md_content = self._acquire_content(md_path)
 
-        if html_content and md_content:
-            mermaid_essence = self._extract_mermaid_essence(md_content)
-            if mermaid_essence:
-                enhanced_html = self._infuse_mermaid_content(html_content, mermaid_essence)
+        if html_content:
+            mermaid_essences = self._extract_mermaid_essences(html_content)
+            if mermaid_essences:
+                logger.info(f"抽出されたMermaidブロック: {len(mermaid_essences)}")
+                logger.debug(f"Mermaidブロックの内容:\n{pformat(mermaid_essences)}")
+                enhanced_html = self._infuse_mermaid_contents(html_content, mermaid_essences)
                 enhanced_html = self._empower_with_mermaid_scripts(enhanced_html)
                 self._materialize_fusion(output_path, enhanced_html)
                 logger.success("Mermaid統合プロセスが見事に完了しました")
@@ -44,34 +46,63 @@ class MermaidFusionMaster:
         except Exception as e:
             logger.error(f"融合結果の具現化中に障害が発生しました: {str(e)}")
 
-    def _extract_mermaid_essence(self, md_content):
+    def _extract_mermaid_essences(self, html_content):
         logger.info("Mermaidのエッセンスを抽出します")
-        mermaid_match = re.search(r'```mermaid\n(.*?)\n```', md_content, re.DOTALL)
-        if mermaid_match:
-            logger.success("Mermaidのエッセンス抽出に成功しました")
-            return mermaid_match.group(1)
+        pattern = r'<pre class="highlight ">\.\. code:: mermaid\s*(.*?)</pre>'
+        mermaid_matches = re.findall(pattern, html_content, re.DOTALL)
+        if mermaid_matches:
+            logger.success(f"Mermaidのエッセンス抽出に成功しました: {len(mermaid_matches)}個")
+            return [match.strip() for match in mermaid_matches]
         else:
             logger.warning("Mermaidのエッセンスが見つかりませんでした")
-            return None
+            return []
 
-    def _infuse_mermaid_content(self, html_content, mermaid_essence):
+    def _infuse_mermaid_contents(self, html_content, mermaid_essences):
         logger.info("HTMLにMermaidのエッセンスを注入します")
-        pattern = r'<p>Content block expected for the "code" directive; none found.</p>\s*<pre class="highlight ">.. code:: mermaid\s*</pre>.*?</dl>'
-        infusion = f'''<div class="mermaid">
-{mermaid_essence}
+        pattern = r'<p>Cannot.*?</p>\s*<pre class="highlight ">.. code:: mermaid\s*(.*?)</pre>'
+        
+        for essence in mermaid_essences:
+            match = re.search(pattern, html_content, re.DOTALL)
+            if match:
+                original_content = match.group(0)
+                logger.debug(f"マッチした原文:\n{original_content}")
+                
+                replacement = f'''\n<div class="mermaid">
+{essence}
 </div>'''
-        enhanced_html = re.sub(pattern, infusion, html_content, flags=re.DOTALL)
-        logger.success("Mermaidエッセンスの注入が完了しました")
-        return enhanced_html
+                
+                html_content = html_content.replace(original_content, replacement, 1)
+                logger.success("Mermaidコードの置換が完了しました")
+            else:
+                logger.warning("対応するMermaidブロックが見つかりませんでした")
+        
+        return html_content
 
     def _empower_with_mermaid_scripts(self, html_content):
         logger.info("HTMLをMermaidの力で強化します")
         mermaid_enchantment = '''
 <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
 <script>
-  mermaid.initialize({
-      startOnLoad: true, 
-      theme: 'default'
+  document.addEventListener('DOMContentLoaded', (event) => {
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'default'
+    });
+    
+    function renderMermaid() {
+      const mermaidDivs = document.querySelectorAll('.mermaid');
+      mermaidDivs.forEach((div) => {
+        if (div.offsetHeight === 0) {
+          mermaid.init(undefined, div);
+        }
+      });
+    }
+
+    // 初回レンダリング
+    renderMermaid();
+
+    // 1秒ごとにレンダリングを試みる
+    setInterval(renderMermaid, 1000);
   });
 </script>
 '''
@@ -88,9 +119,8 @@ def main():
     logger.info("Mermaid融合の儀式を開始します")
     fusion_master = MermaidFusionMaster()
     fusion_master.orchestrate_fusion(
-        'example/hovercraft_assets/index.html',
-        'example/hovercraft_assets/test_output_slides.md',
-        'example/hovercraft_assets/index2.html'
+        'example2/hovercraft_assets/index.html',
+        'example2/hovercraft_assets/enchanted_output.html'
     )
 
 if __name__ == "__main__":
