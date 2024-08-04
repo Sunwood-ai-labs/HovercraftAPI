@@ -16,6 +16,7 @@ hovercraft = "^2.7"
 pandoc = "^2.3"
 art = "^6.2"
 beautifulsoup4 = "^4.12.3"
+python-dotenv = "^1.0.1"
 
 [tool.poetry.scripts]
 hovercraft-api = "hovercraft_api:cli"
