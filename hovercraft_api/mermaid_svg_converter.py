@@ -6,6 +6,9 @@ from loguru import logger
 from art import *
 import html
 import shutil
+import xml.etree.ElementTree as ET
+from bs4 import BeautifulSoup
+
 
 class MermaidSVGConverter:
     def __init__(self, css_file=None):
@@ -44,7 +47,8 @@ class MermaidSVGConverter:
                 self._materialize_fusion(output_html_path, enhanced_html)
                 logger.success("Mermaid to SVG変換プロセスが見事に完了しました")
             else:
-                logger.error("Mermaidのブロックが見つからず、変換プロセスを中断します")
+                self._materialize_fusion(output_html_path, html_content)
+                logger.warning("Mermaidのブロックが見つからず、変換プロセスを中断します")
         else:
             logger.error("HTMLファイルの取得に失敗し、変換プロセスを中断します")
 
@@ -77,6 +81,94 @@ class MermaidSVGConverter:
             logger.warning("Mermaidブロックが見つかりませんでした")
         
         return modified_html, mermaid_blocks
+
+    def _adjust_svg_width(self, svg_file):
+        with open(svg_file, 'r', encoding='utf-8') as f:
+            soup = BeautifulSoup(f, 'xml')
+
+        # <g>要素を検索 (class属性に"node"を含むもの)
+        for g in soup.find_all('g', class_=lambda x: x and 'node' in x.split()):
+            rect = g.find('rect', class_='basic label-container')
+            foreign_object = g.find('foreignObject')
+            
+            if rect and foreign_object:
+                try:
+                    # foreignObjectの幅を調整
+                    fo_width = foreign_object.get('width')
+                    if fo_width and fo_width != '0':
+                        new_fo_width = float(fo_width) + 20
+                        foreign_object['width'] = str(new_fo_width)
+                        logger.debug(f"foreignObject幅調整: {fo_width} -> {new_fo_width}")
+
+                    # rectの幅を調整
+                    rect_width = rect.get('width')
+                    if rect_width and rect_width != '0':
+                        new_rect_width = float(rect_width) + 20
+                        rect['width'] = str(new_rect_width)
+                        logger.debug(f"rect幅調整: {rect_width} -> {new_rect_width}")
+
+                    # rectのx属性を調整（中央揃えを維持するため）
+                    rect_x = rect.get('x')
+                    if rect_x:
+                        new_rect_x = float(rect_x) - 10
+                        rect['x'] = str(new_rect_x)
+                        logger.debug(f"rect x位置調整: {rect_x} -> {new_rect_x}")
+
+                    # 親のg要素の変換を調整（必要な場合）
+                    transform = g.get('transform')
+                    if transform:
+                        match = re.search(r'translate\(([-\d.]+),\s*([-\d.]+)\)', transform)
+                        if match:
+                            x, y = map(float, match.groups())
+                            new_x = x + 10  # X座標を10ピクセル右に移動
+                            g['transform'] = f'translate({new_x}, {y})'
+                            logger.debug(f"g transform調整: {x},{y} -> {new_x},{y}")
+
+                except ValueError as e:
+                    logger.error(f"幅の調整中にエラーが発生しました: {e}")
+                    logger.error(f"問題のある要素: {g}")
+                    # エラーが発生しても処理を続行
+                    continue
+
+        # SVG要素の調整
+        svg = soup.find('svg')
+        if svg:
+            viewbox = svg.get('viewBox')
+            if viewbox:
+                x, y, width, height = map(float, viewbox.split())
+                
+                # viewBoxの幅を20増やす
+                new_width = width + 20
+                svg['viewBox'] = f"{x} {y} {new_width} {height}"
+                
+                # style属性を更新
+                style = svg.get('style', '')
+                style_dict = dict(item.split(': ') for item in style.split('; ') if item)
+                style_dict['max-width'] = f'{new_width}px'
+                style_dict['background-color'] = 'None'
+                
+                # テキストのシャープネスを向上させるための設定を追加
+                style_dict['shape-rendering'] = 'crispEdges'
+                style_dict['text-rendering'] = 'optimizeLegibility'
+                
+                svg['style'] = '; '.join(f'{k}: {v}' for k, v in style_dict.items())
+
+        # テキスト要素のフォントサイズを調整
+        for text in soup.find_all('text'):
+            current_size = text.get('font-size')
+            if current_size:
+                # フォントサイズを少し大きくする（例: 10%増加）
+                new_size = float(current_size.replace('px', '')) * 1.1
+                text['font-size'] = f'{new_size}px'
+
+        # 調整後のSVGファイル名
+        adjusted_svg_file = svg_file.replace('.svg', '_adjusted.svg')
+        
+        # SVGを保存
+        with open(adjusted_svg_file, 'w', encoding='utf-8') as f:
+            f.write(str(soup))
+        
+        return adjusted_svg_file
 
     def _convert_mermaid_to_svg(self, html_content, mermaid_blocks, svg_dir, input_html_path):
         logger.info("MermaidをSVGに変換します")
@@ -116,11 +208,19 @@ class MermaidSVGConverter:
                 logger.error(f"mermaid-cli error output: {e.stderr}")
                 continue
             
-            relative_svg_path = os.path.relpath(svg_file, os.path.dirname(input_html_path)).replace('\\', '/')
-            svg_tag = f'<img src="{relative_svg_path}" alt="Mermaid diagram" />'
+            # SVGファイルの幅を調整
+            adjusted_svg_file = self._adjust_svg_width(svg_file)
+            relative_svg_path = os.path.relpath(adjusted_svg_file, os.path.dirname(input_html_path)).replace('\\', '/')
+            
+            # <object>タグと<img>タグの両方を生成
+            object_tag = f'<object type="image/svg+xml" data="{relative_svg_path}" style="width: 100%; height: auto;">SVGがサポートされていません</object>'
+            img_tag = f'<img src="{relative_svg_path}" alt="Mermaid diagram" style="width: 100%; height: auto;">'
+            
+            # combined_tags = f'<div class="mermaid-svg-container">{object_tag}{img_tag}</div>'
+            combined_tags = f'<div class="mermaid-svg-container">{img_tag}</div>'
             
             placeholder = f"__MERMAID_{index:03d}__"
-            html_content = html_content.replace(placeholder, svg_tag)
+            html_content = html_content.replace(placeholder, combined_tags)
             
             logger.success(f"Mermaid図 {index + 1} をSVGに変換しました: {os.path.basename(svg_file)}")
 
@@ -137,7 +237,7 @@ class MermaidSVGConverter:
 
 def main():
     logger.info("Mermaid to SVG変換の儀式を開始します")
-    css_file = 'css/flowchart1.css'  # CSSファイルのパスを指定
+    css_file = 'css/svg_oasis.css'  # CSSファイルのパスを指定
     svg_converter = MermaidSVGConverter(css_file=css_file)
     svg_converter.convert_html_mermaid_to_svg(
         'example2/hovercraft_assets/enchant_codeblock.html',

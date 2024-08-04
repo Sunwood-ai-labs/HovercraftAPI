@@ -1,0 +1,60 @@
+/* custom_theme.css */
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&display=swap');
+
+body {
+    font-family: 'Shippori Mincho', serif;
+    background: linear-gradient(135deg, #ffd700, #87ceeb);
+    font-size: large;
+    color: #333;
+}
+
+.step {
+    width: 900px;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+h1, h2, h3 {
+    color: #0066cc;
+}
+
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 1000;
+    }
+    10% {
+        stroke-dashoffset: 1000;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+g.label foreignObject {
+    width: 120%;
+    text-align: left;
+}
+
+/* SVGオブジェクトの背景を透明にする */
+object[type="image/svg+xml"] {
+    background-color: transparent !important;
+}
+
+/* SVG内の背景を透明にする（SVGがインライン埋め込みの場合） */
+svg {
+    background-color: transparent !important;
+}
+
+/* MermaidのSVG特有のスタイル */
+#my-svg {
+    background-color: transparent !important;
+}
+
+#my-svg svg {
+    background-color: transparent !important;
+}
+
+/* その他の既存のスタイル */
