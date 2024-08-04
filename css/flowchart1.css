@@ -32,3 +32,23 @@ g.label foreignObject {
     text-align: left;
 }
 
+.mermaid {
+    font-family: 'Shippori Mincho', serif !important;
+}
+
+#my-svg {
+    font-family: 'Shippori Mincho', serif !important;
+}
+
+#my-svg .label {
+    font-family: 'Shippori Mincho', serif !important;
+}
+
+#my-svg .node .label {
+    font-family: 'Shippori Mincho', serif !important;
+    text-align: left;
+}
+
+#my-svg .edgeLabel {
+    font-family: 'Shippori Mincho', serif !important;
+}
