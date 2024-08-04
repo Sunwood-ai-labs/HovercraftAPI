@@ -1,22 +1,33 @@
 from loguru import logger
 from litellm import completion
 from config import get_settings
+import time
 
 class LLMService:
     def __init__(self):
         self.settings = get_settings()
         self.model = self.settings.LITELLM_MODEL
+        self.max_retries = 5
+        self.retry_delay = 30
 
     def get_response(self, prompt: str) -> str:
-        try:
-            response = completion(
-                model=self.model,
-                messages=[{"role": "user", "content": prompt}]
-            )
-            return response.choices[0].message.content.strip()
-        except Exception as e:
-            logger.error(f"LLMからのレスポンス取得中にエラーが発生しました: {str(e)}")
-            raise
+        original_prompt = prompt
+        for attempt in range(self.max_retries):
+            try:
+                response = completion(
+                    model=self.model,
+                    messages=[{"role": "user", "content": prompt}]
+                )
+                return response.choices[0].message.content.strip()
+            except Exception as e:
+                logger.error(f"LLMからのレスポンス取得中にエラーが発生しました (試行 {attempt + 1}/{self.max_retries}): {str(e)}")
+                if attempt < self.max_retries - 1:
+                    # プロンプトの後ろ1割を削除
+                    prompt = original_prompt[:int(len(original_prompt) * 0.9)]
+                    logger.info(f"プロンプトを短縮しました。新しい長さ: {len(prompt)}")
+                    time.sleep(self.retry_delay)
+                else:
+                    raise
 
     def apply_diff(self, original_content: str, diff: str) -> str:
         prompt = f"""```diff
