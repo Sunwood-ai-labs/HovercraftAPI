@@ -8,7 +8,7 @@ class LLMService:
         self.settings = get_settings()
         self.model = self.settings.LITELLM_MODEL
         self.max_retries = 5
-        self.retry_delay = 30
+        self.retry_delay = 60
 
     def get_response(self, prompt: str) -> str:
         current_prompt = prompt
@@ -23,7 +23,7 @@ class LLMService:
                 logger.error(f"LLMからのレスポンス取得中にエラーが発生しました (試行 {attempt + 1}/{self.max_retries}): {str(e)}")
                 if attempt < self.max_retries - 1:
                     # プロンプトの後ろ1割を削除
-                    current_prompt = current_prompt[:int(len(current_prompt) * 0.7)]
+                    current_prompt = current_prompt[:int(len(current_prompt) * 0.5)]
                     num_lines = current_prompt.count('\n') + 1
                     logger.info(f"プロンプトを短縮しました。新しい長さ: {len(current_prompt)} 文字, {num_lines} 行")
                     time.sleep(self.retry_delay)
