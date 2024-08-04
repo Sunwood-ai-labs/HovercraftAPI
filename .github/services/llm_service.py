@@ -8,7 +8,7 @@ class LLMService:
         self.settings = get_settings()
         self.model = self.settings.LITELLM_MODEL
         self.max_retries = 5
-        self.retry_delay = 30
+        self.retry_delay = 60
 
     def get_response(self, prompt: str) -> str:
         current_prompt = prompt
