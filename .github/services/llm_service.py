@@ -24,7 +24,8 @@ class LLMService:
                 if attempt < self.max_retries - 1:
                     # プロンプトの後ろ1割を削除
                     current_prompt = current_prompt[:int(len(current_prompt) * 0.9)]
-                    logger.info(f"プロンプトを短縮しました。新しい長さ: {len(current_prompt)}")
+                    num_lines = current_prompt.count('\n') + 1
+                    logger.info(f"プロンプトを短縮しました。新しい長さ: {len(current_prompt)} 文字, {num_lines} 行")
                     time.sleep(self.retry_delay)
                 else:
                     raise
