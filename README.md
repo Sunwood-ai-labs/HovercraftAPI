@@ -39,7 +39,7 @@
 
 ## 🌟 HovercraftAPI
 
-HovercraftAPIは、Markdownファイルから印象的なHovercraftプレゼンテーションを簡単に作成するためのPythonツールです。Mermaidダイアグラムやコードブロックのサポート、カスタムCSSによるスタイリングなど、多彩な機能を提供します。
+HovercraftAPIは、Markdownファイルから印象的なHovercraftプレゼンテーションを簡単に作成するためのPythonツールです。Mermaidダイアグラムやコードブロックのサポート、カスタムCSSによるスタイリング、動的な3Dトランジション、SVG変換など、多彩な機能を提供します。
 
 ## 🎥 デモ
 
@@ -67,8 +67,7 @@ hovercraftapi example/README.md -c css/mytheme.css
 hovercraft-api example3/README.md -c css/mytheme.css --enable-dynamic-position
 ```
 
-
-### css
+### カスタムCSSの使用
 
 ```bash
 poetry run hovercraft-api example3/README.md -c css/oasis.css --enable-dynamic-position 
@@ -90,20 +89,16 @@ api.generate_slides()
 * Mermaidダイアグラムとコードブロックをサポート
 * カスタムCSSによるスタイリング
 * CLIインターフェース対応
-* スライドのキャプチャと動画生成機能 (実験的機能)
-* 動的なスライド位置決め機能 ([v0.2.0で追加](https://github.com/Sunwood-ai-labs/HovercraftAPI/releases/tag/v0.2.0))
-* MermaidダイアグラムのSVG変換とアニメーション ([v0.2.0で追加](https://github.com/Sunwood-ai-labs/HovercraftAPI/releases/tag/v0.2.0))
-* ローカルMermaid SVGプレビューサーバー ([v0.2.0で追加](https://github.com/Sunwood-ai-labs/HovercraftAPI/releases/tag/v0.2.0))
+* スライドのキャプチャと動画生成機能
+* 動的なスライド位置決め機能
+* MermaidダイアグラムのSVG変換とアニメーション
+* ローカルMermaid SVGプレビューサーバー
 
 ## 必要条件
 
 * Python 3.10以上
 * Poetry（依存関係管理に使用）
 * その他の依存関係は `pyproject.toml` を参照してください。
-
-## カスタムCSS
-
-デフォルトのCSSファイルは `css/mytheme.css` です。カスタムCSSファイルを使用する場合は、`-c` または `--css` オプションで指定してください。
 
 ## プロジェクト構造
 
@@ -159,8 +154,7 @@ MermaidダイアグラムをSVGに変換:
 poetry run python hovercraft_api\mermaid_svg_converter.py
 ```
 
-
-MermaidダイアグラムをSVGに変換:
+スライドのキャプチャと動画生成:
 ```bash
 poetry run hovercraft-api example2\README.md --stages capture_slides --capture-images --capture-video
 ```
