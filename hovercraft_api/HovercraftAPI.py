@@ -3,6 +3,7 @@ from loguru import logger
 import shutil
 import argparse
 from typing import List
+from dotenv import load_dotenv
 
 from .markdown_to_rst_converter import MarkdownToRSTConverter
 from .rst_adjuster import RSTAdjuster
@@ -27,6 +28,11 @@ class HovercraftAPI:
                  capture_fps: int = 30, capture_duration: int = 5,
                  html_file: str = 'index_with_svg.html',
                  stages: List[str] = ['all']):
+
+        # Load environment variables from .env file
+        self.working_dir = os.getcwd()
+        dotenv_path = os.path.join(self.working_dir, '.env')
+        load_dotenv(dotenv_path)
         
         # 入力ファイルと設定
         self.markdown_file = markdown_file  # 入力Markdownファイルのパス
