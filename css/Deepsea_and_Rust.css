@@ -1,0 +1,154 @@
+/* enhanced_custom_theme_deepsea_and_rust.css */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap');
+
+:root {
+    --deep-navy: #151F30;
+    --ocean-blue: #103778;
+    --bright-teal: #0593A2;
+    --warm-orange: #FF7A48;
+    --rust-red: #E3371E;
+    --light-gray: #F0F0F0;
+    --white: #FFFFFF;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: linear-gradient(135deg, var(--deep-navy), var(--ocean-blue));
+    color: var(--white);
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.step {
+    width: 900px;
+    padding: 40px;
+    background-color: rgba(21, 31, 48, 0.8); /* semi-transparent deep-navy */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    border: 1px solid var(--bright-teal);
+}
+
+.step:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+h1, h2, h3 {
+    font-family: 'Noto Serif JP', serif;
+    color: var(--warm-orange);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--bright-teal);
+    padding-bottom: 10px;
+}
+
+h1 { font-size: 2.5em; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+h2 { font-size: 2em; }
+h3 { font-size: 1.5em; }
+
+ul, ol {
+    padding-left: 25px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+li::marker {
+    color: var(--bright-teal);
+}
+
+pre {
+    background-color: var(--deep-navy);
+    border-left: 4px solid var(--rust-red);
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+code {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9em;
+    color: var(--light-gray);
+}
+
+a {
+    color: var(--bright-teal);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--warm-orange);
+    text-decoration: underline;
+}
+
+.highlight {
+    background-color: var(--rust-red);
+    color: var(--white);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+blockquote {
+    border-left: 4px solid var(--warm-orange);
+    padding-left: 20px;
+    margin-left: 0;
+    font-style: italic;
+    color: var(--light-gray);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid var(--ocean-blue);
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--ocean-blue);
+    color: var(--white);
+}
+
+tr:nth-child(even) {
+    background-color: rgba(16, 55, 120, 0.3); /* semi-transparent ocean-blue */
+}
+
+/* SVG and Mermaid diagram styles */
+g.label foreignObject {
+    color: var(--white);
+}
+
+[id^="mermaid-"] .node rect,
+[id^="mermaid-"] .node circle,
+[id^="mermaid-"] .node ellipse,
+[id^="mermaid-"] .node polygon,
+[id^="mermaid-"] .node path {
+    fill: var(--ocean-blue) !important;
+    stroke: var(--bright-teal) !important;
+}
+
+[id^="mermaid-"] .edgePath .path {
+    stroke: var(--warm-orange) !important;
+}
+
+[id^="mermaid-"] .arrowheadPath {
+    fill: var(--warm-orange) !important;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .step {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.7em; }
+    h3 { font-size: 1.4em; }
+}
