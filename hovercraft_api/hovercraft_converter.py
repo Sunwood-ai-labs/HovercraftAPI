@@ -2,6 +2,7 @@ import subprocess
 from loguru import logger
 import os
 from art import *
+import shutil
 
 class HovercraftConverter:
     def __init__(self, output_dir='output', css_file='css/mytheme.css'):
@@ -37,7 +38,9 @@ class HovercraftConverter:
 if __name__ == "__main__":
     # テスト用のRSTファイルを作成
     test_rst = r"example\hovercraft_assets\test_output_dynamic_hovercraft.rst"
-    converter = HovercraftConverter(output_dir=r'example\hovercraft_assets')
+    converter = HovercraftConverter(
+        output_dir=r'example\hovercraft_assets',
+    )
     
     try:
         success = converter.convert(test_rst)

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hovercraft-api"
-version = "0.2.2"
+version = "0.3.0"
 description = ""
 authors = ["Maki <sunwood.ai.labs@gmail.com>"]
 readme = "README.md"
@@ -15,6 +15,7 @@ loguru = "^0.7.2"
 hovercraft = "^2.7"
 pandoc = "^2.3"
 art = "^6.2"
+beautifulsoup4 = "^4.12.3"
 
 [tool.poetry.scripts]
 hovercraft-api = "hovercraft_api:cli"
