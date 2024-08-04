@@ -22,7 +22,8 @@ class MermaidFusionMaster:
                 self._materialize_fusion(output_path, enhanced_html)
                 logger.success("Mermaid統合プロセスが見事に完了しました")
             else:
-                logger.error("Mermaidのエッセンスが見つからず、融合プロセスを中断します")
+                logger.warning("Mermaidのエッセンスが見つからず、融合プロセスを中断します")
+                self._materialize_fusion(output_path, html_content)
         else:
             logger.error("必要な素材の取得に失敗し、融合プロセスを中断します")
 
