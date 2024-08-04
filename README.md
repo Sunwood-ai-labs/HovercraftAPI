@@ -64,7 +64,15 @@ hovercraftapi example/README.md -c css/mytheme.css
 
 3Dダイナミックトランジションを有効にする場合:
 ```bash
-hovercraft-api example/README.md -c css/mytheme.css --enable-dynamic-position
+hovercraft-api example3/README.md -c css/mytheme.css --enable-dynamic-position
+```
+
+
+### css
+
+```bash
+poetry run hovercraft-api example3/README.md -c css/oasis.css --enable-dynamic-position 
+poetry run hovercraft-api example3/README.md -c css/Deepsea_and_Rust.css --enable-dynamic-position --svg-css-file css/svg_oasis.css
 ```
 
 ### Pythonスクリプト内での使用
@@ -149,6 +157,12 @@ poetry run python hovercraft_api\mermaid_server.py
 MermaidダイアグラムをSVGに変換:
 ```bash
 poetry run python hovercraft_api\mermaid_svg_converter.py
+```
+
+
+MermaidダイアグラムをSVGに変換:
+```bash
+poetry run hovercraft-api example2\README.md --stages capture_slides --capture-images --capture-video
 ```
 
 ## 🤝 貢献
