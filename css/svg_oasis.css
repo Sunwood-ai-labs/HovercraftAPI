@@ -1,0 +1,185 @@
+#my-svg {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 16px;
+    fill: #333;
+    background-color: transparent;
+}
+
+#my-svg .error-icon {
+    fill: #fffaf0;
+}
+
+#my-svg .error-text {
+    fill: #0066cc;
+    stroke: #0066cc;
+}
+
+#my-svg .edge-thickness-normal {
+    stroke-width: 2px;
+}
+
+#my-svg .edge-thickness-thick {
+    stroke-width: 3.5px;
+}
+
+#my-svg .edge-pattern-solid {
+    stroke-dasharray: 0;
+}
+
+#my-svg .edge-pattern-dashed {
+    stroke-dasharray: 5;
+}
+
+#my-svg .edge-pattern-dotted {
+    stroke-dasharray: 2;
+}
+
+#my-svg .marker {
+    fill: #0066cc;
+    stroke: #0066cc;
+}
+
+#my-svg .marker.cross {
+    stroke: #0066cc;
+}
+
+#my-svg svg {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 16px;
+    background-color: transparent;
+}
+
+#my-svg .label {
+    font-family: 'Shippori Mincho', serif;
+    color: #333;
+}
+
+#my-svg .cluster-label text {
+    fill: #0066cc;
+}
+
+#my-svg .cluster-label span,
+#my-svg p {
+    color: #0066cc;
+}
+
+#my-svg .label text,
+#my-svg span,
+#my-svg p {
+    fill: #333;
+    color: #333;
+}
+
+#my-svg .node rect,
+#my-svg .node circle,
+#my-svg .node ellipse,
+#my-svg .node polygon,
+#my-svg .node path {
+    /* fill: url(#oasis-gradient); */
+    /* fill:  radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190)); */
+    fill: rgb(255, 255, 255);
+    fill: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(rgb(240, 240, 240)), to(rgb(190, 190, 190)));
+    fill: -webkit-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
+    fill:    -moz-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
+    fill:     -ms-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
+    fill:      -o-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
+    fill:         radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
+    stroke: #0066cc;
+    stroke-width: 2px;
+}
+
+#my-svg .flowchart-label text {
+    text-anchor: middle;
+}
+
+#my-svg .node .label {
+    text-align: center;
+}
+
+#my-svg .node.clickable {
+    cursor: pointer;
+}
+
+#my-svg .arrowheadPath {
+    fill: #0066cc;
+}
+
+#my-svg .edgePath .path {
+    stroke: #0066cc;
+    stroke-width: 2.0px;
+}
+
+#my-svg .flowchart-link {
+    stroke: #0066cc;
+    fill: none;
+}
+
+#my-svg .edgeLabel {
+    background-color: white;
+    text-align: center;
+}
+
+#my-svg .edgeLabel rect {
+    opacity: 1;
+    background-color: white;
+    fill: white;
+}
+
+#my-svg .labelBkg {
+    background-color: white;
+}
+
+#my-svg .cluster rect {
+    fill: rgba(255, 215, 0, 0.1);
+    stroke: #ffd700;
+    stroke-width: 1px;
+}
+
+#my-svg .cluster text {
+    fill: #0066cc;
+}
+
+#my-svg .cluster span,
+#my-svg p {
+    color: #0066cc;
+}
+
+#my-svg div.mermaidTooltip {
+    position: absolute;
+    text-align: center;
+    max-width: 200px;
+    padding: 2px;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 12px;
+    background: #fffaf0;
+    border: 1px solid #ffd700;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 100;
+}
+
+#my-svg .flowchartTitleText {
+    text-anchor: middle;
+    font-size: 18px;
+    fill: #0066cc;
+}
+
+/* SVGグラデーションの定義 */
+#my-svg defs {
+    position: absolute;
+    height: 0;
+    width: 0;
+}
+
+#my-svg defs linearGradient#oasis-gradient {
+    --color-stop-1: #ffd700;
+    --color-stop-2: #87ceeb;
+}
+
+#my-svg defs linearGradient#oasis-gradient stop:nth-child(1) {
+    stop-color: var(--color-stop-1);
+}
+
+#my-svg defs linearGradient#oasis-gradient stop:nth-child(2) {
+    stop-color: var(--color-stop-2);
+}
