@@ -3,8 +3,9 @@ from litellm import completion
 from art import *
 
 class MarkdownToSlidesConverter:
-    def __init__(self):
+    def __init__(self, model_name="gemini/gemini-1.5-pro-latest"):
         logger.info("MarkdownToSlidesConverter initialized")
+        self.model_name = model_name
 
     def read_file(self, file_path):
         """指定されたファイルを読み込み、その内容を返す"""
@@ -39,8 +40,9 @@ class MarkdownToSlidesConverter:
 1. タイトルは# (h1)で表現してください。
 2. 章見出しは## (h2)のみを使用してください。
 3. 箇条書きを駆使してスライドの内容を構成してください。
-4. 各h2の見出しの間には必ず"---"を挿入してスライドを区切ってください。
 5. コンテンツは簡潔に、1スライドあたり3-5項目程度にまとめてください。
+6. 図などがある場合は簡潔な1行程度のスライド＋図になるようにして
+7. 長いソースコードがある場合は簡潔に要約して重要な個所だけを表示するようにして
 
 変換するマークダウンの内容：
 
@@ -49,10 +51,14 @@ class MarkdownToSlidesConverter:
 
         try:
             response = completion(
-                model="gemini/gemini-1.5-pro-latest",
+                model=self.model_name,
                 messages=[{"role": "user", "content": prompt}]
             )
             slides_content = response.choices[0].message.content
+            
+            # 指定された置換を適用
+            slides_content = slides_content.replace('\n## ', '\n---\n\n## ')
+
             logger.success("スライド形式への変換が完了しました")
             return slides_content
         except Exception as e:
